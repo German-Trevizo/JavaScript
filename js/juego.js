@@ -1,8 +1,32 @@
+// me aseguro de que se ha cargado toda la pagina
+var indiceRandom = 0;
+var op = [];
 $(document).ready(function(){
 
+    /*
     $("#login").animate({
         'top':"10%"
     },300);
+    */
+
+    $.getJSON('https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json', function(data){
+               // console.log(data.elements[0]);
+
+               var cuantos = data.elements.length;
+               var random = Math.floor(Math.random() * cuantos);
+               console.log(cuantos);
+              $("#elemento").find('h2').text(data.elements[random].name);
+            for(var i=0;i<3;i++){
+                var num = Math.floor(Math.random() * cuantos)
+                op.push(num);
+                $("#opciones").find('ul').append('<li><h2>'+data.elements[num].symbol+'</h2></li>');
+            }
+            $("#opciones").find('ul').append('<li><h2>'+data.elements[indiceRandom].symbol+'</h2></li>');
+            op.push(indiceRandom);
+            console.log(op);
+
+            });
+
 
     $("#txtNombre").on('keyup', function(){
         $("#txtNombre").css('border','1px solid white'); 
